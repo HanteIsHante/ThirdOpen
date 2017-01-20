@@ -8,6 +8,13 @@
  开源库 |作用
 ---|---
 [Butter Knife](https://github.com/JakeWharton/butterknife) |  替换繁琐的findViewByid
+**RXJava**| 主线异步通知|
+**retrofit**| 对okhttp的封装、Json 转换成对象
+**okhttp**| 网络请求操作
+**Design**| 谷歌设计
+
+
+
 
  
 
