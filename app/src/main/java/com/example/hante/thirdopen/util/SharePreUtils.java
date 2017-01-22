@@ -5,11 +5,17 @@ import android.content.SharedPreferences;
 
 /**
  * Created By HanTe
+ * SharePreferences 全局存储、获取 值
+ * String
+ * int
+ * Boolean
+ * 删除指定值
+ * 删除所有数据
  */
 
 public class SharePreUtils {
 
-    public static final String  SHARE_NAME = "config";
+    private static final String  SHARE_NAME = "config";
 
     /**
      * 存储字符串
@@ -74,7 +80,7 @@ public class SharePreUtils {
     /**
      * 删除全部数据
      *
-     * @param context
+     * @param context 上下文
      */
     public static void deleShareAll(Context context) {
         SharedPreferences sp = context.getSharedPreferences(SHARE_NAME, Context.MODE_PRIVATE);
