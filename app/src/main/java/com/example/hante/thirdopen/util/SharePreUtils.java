@@ -58,7 +58,7 @@ public class SharePreUtils {
      * @param context 上下文
      * @param key 键
      * @param values   默认值
-     * @return true/false
+     * @return true/false 当读取不到指定的数据时，使用的默认值defValue
      */
     public static boolean getBoolean(Context context, String key, boolean values) {
         SharedPreferences sp = context.getSharedPreferences(SHARE_NAME, Context.MODE_PRIVATE);
@@ -106,7 +106,7 @@ public class SharePreUtils {
      * @param context 上下文
      * @param key 键
      * @param values   默认值
-     * @return 返回键值
+     * @return 返回键值 当读取不到指定的数据时，使用的默认值defValue
      */
     public static int getInt(Context context, String key, int values) {
         SharedPreferences sp = context.getSharedPreferences(SHARE_NAME, Context.MODE_PRIVATE);
