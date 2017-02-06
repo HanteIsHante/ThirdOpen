@@ -46,4 +46,8 @@ dependencies {
 
     // Design
     compile 'com.android.support:design:25.0.1'
+
+    // 添加 ConstraintLayout 约束布局
+    compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
+    compile 'com.android.support:recyclerview-v7:25.0.1'
 }

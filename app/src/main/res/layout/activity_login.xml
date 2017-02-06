@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_login"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.hante.thirdopen.useractivity.LoginActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:theme="?attr/actionBarTheme"
+        android:minHeight="?attr/actionBarSize"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="0dp"
+        android:id="@+id/toolbar_login"
+        tools:ignore="MissingConstraints"/>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="384dp"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteY="195dp"
+        tools:layout_editor_absoluteX="68dp"
+        tools:ignore="MissingConstraints">
+
+        <EditText
+            android:layout_width="256dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteY="293dp"
+        tools:layout_editor_absoluteX="72dp"
+        tools:ignore="MissingConstraints">
+
+        <EditText
+            android:layout_width="254dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/password"/>
+    </android.support.design.widget.TextInputLayout>
+</android.support.constraint.ConstraintLayout>
