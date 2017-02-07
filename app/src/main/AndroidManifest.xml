@@ -20,6 +20,8 @@
         </activity>
         <activity android:name=".ThirdOpenHomeActivity">
         </activity>
+        <activity android:name=".useractivity.RegisterActivity">
+        </activity>
     </application>
 
 </manifest>
