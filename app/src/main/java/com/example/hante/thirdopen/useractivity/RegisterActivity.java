@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 //Execute task initFreeline and download freeline dependencies...
 import com.example.hante.thirdopen.R;
+import com.example.hante.thirdopen.util.Utils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -52,5 +53,6 @@ public class RegisterActivity extends AppCompatActivity {
 
     @OnClick(R.id.button_register)
     public void onClick () {
+        Utils.isNotFastClick();
     }
 }

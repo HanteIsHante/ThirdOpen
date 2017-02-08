@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.hante.thirdopen.R;
 import com.example.hante.thirdopen.ThirdOpenHomeActivity;
+import com.example.hante.thirdopen.util.Utils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -36,13 +37,17 @@ public class LoginActivity extends AppCompatActivity {
     public void onClick (View view) {
         switch(view.getId()) {
             case R.id.button_login:
-                Intent home = new Intent(getApplicationContext(), ThirdOpenHomeActivity.class);
-                startActivity(home);
-                finish();
+                if (Utils.isNotFastClick()) {
+                    Intent home = new Intent(getApplicationContext(), ThirdOpenHomeActivity.class);
+                    startActivity(home);
+                    finish();
+                }
                 break;
             case R.id.to_register:
-                Intent i = new Intent(getApplicationContext(), RegisterActivity.class);
-                startActivity(i);
+                if (Utils.isNotFastClick()){
+                    Intent i = new Intent(getApplicationContext(), RegisterActivity.class);
+                    startActivity(i);
+                }
                 break;
         }
     }
