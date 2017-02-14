@@ -36,7 +36,8 @@ dependencies {
      // RXJava
     compile 'io.reactivex.rxjava2:rxjava:2.0.4'
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
-
+    //RxJava2 Adapter
+    compile 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
     //retrofit
     //如果要将 JSON 数据转化为 Java 实体类对象，需要自己显式指定一个 Gson Converter
     compile 'com.squareup.retrofit2:retrofit:2.1.0'

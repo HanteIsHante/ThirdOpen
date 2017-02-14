@@ -20,6 +20,10 @@
         </activity>
         <activity android:name=".ThirdOpenHomeActivity">
         </activity>
+        <activity android:name=".useractivity.RegisterActivity">
+        </activity>
+        <activity android:name=".flashpage.FlashActivity">
+        </activity>
     </application>
 
 </manifest>
