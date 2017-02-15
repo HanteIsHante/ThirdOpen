@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import com.example.hante.thirdopen.R;
 import com.example.hante.thirdopen.custome.GlideImageLoader;
-import com.example.hante.thirdopen.mvp.adapter.FreeBookAdapter;
+import com.example.hante.thirdopen.mvp.adapter.freebook.FreeBookAdapter;
 import com.example.hante.thirdopen.mvp.entry.freebook.FreeBook;
 import com.example.hante.thirdopen.mvp.presenter.BookPresenter;
 import com.example.hante.thirdopen.mvp.view.BookView;
@@ -86,7 +86,6 @@ public class BookFragment extends Fragment implements BookView, SwipeRefreshLayo
         // 更新UI
         if(book != null) {
             mFreeBookAdapter = new FreeBookAdapter(getActivity(), book);
-            mFreeBookAdapter.setState(FreeBookAdapter.STATE_HIDE);
             mRecyclerViewFreeBook.setAdapter(mFreeBookAdapter);
             mFreeBookRefresh.setRefreshing(false);
             mFreeBookAdapter.setOnItemClickListener(this);
