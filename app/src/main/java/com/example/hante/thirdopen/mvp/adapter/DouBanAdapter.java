@@ -1,4 +1,4 @@
-package com.example.hante.thirdopen.fragment.adapter;
+package com.example.hante.thirdopen.mvp.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

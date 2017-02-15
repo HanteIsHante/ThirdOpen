@@ -8,9 +8,8 @@ package com.example.hante.thirdopen.contract;
 public class Contract {
 
 
-    public static final String BASE_URL = "";
 
-    public static final String FREEBOOK_BASE_URL = "";
+    public static final String FREEBOOK_BASE_URL = "http://mylance.top/";
 
     public static final String ZHIHU_BASE_URL = "";
 

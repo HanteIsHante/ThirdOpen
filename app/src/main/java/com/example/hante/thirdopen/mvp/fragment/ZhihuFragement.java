@@ -1,4 +1,4 @@
-package com.example.hante.thirdopen.fragment;
+package com.example.hante.thirdopen.mvp.fragment;
 
 /**
  * Created By HanTe
