@@ -7,7 +7,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
-import com.example.hante.thirdopen.fragment.BookFragment;
+import com.example.hante.thirdopen.mvp.fragment.BookFragment;
 
 import java.util.ArrayList;
 import java.util.List;
