@@ -31,7 +31,7 @@ import butterknife.ButterKnife;
  * 操控presenter 获取数据
  */
 
-public class BookFragment extends Fragment implements BookView, SwipeRefreshLayout.OnRefreshListener {
+public class BookFragment extends Fragment implements BookView, SwipeRefreshLayout.OnRefreshListener, FreeBookAdapter.onItemClickListener {
 
     @BindView(R.id.recyclerView_freeBook)
     RecyclerView mRecyclerViewFreeBook;
@@ -82,11 +82,12 @@ public class BookFragment extends Fragment implements BookView, SwipeRefreshLayo
 
 
     @Override
-    public void newDatas (List<FreeBook.DataBean.HotBookBean> book) {
+    public void newFreeBooks (List<FreeBook.DataBean.HotBookBean> book) {
         // 更新UI
         FreeBookAdapter mFreeBookAdapter = new FreeBookAdapter(getActivity(), book);
         mRecyclerViewFreeBook.setAdapter(mFreeBookAdapter);
         mFreeBookRefresh.setRefreshing(false);
+        mFreeBookAdapter.setOnItemClickListener(this);
     }
 
     @Override
@@ -108,5 +109,10 @@ public class BookFragment extends Fragment implements BookView, SwipeRefreshLayo
     @Override
     public void onRefresh () {
         mBookPresenter.loadData(true);
+    }
+
+    @Override
+    public void onItemClick (View view, int position) {
+        Toast.makeText(getActivity(), "click " + position, Toast.LENGTH_SHORT).show();
     }
 }

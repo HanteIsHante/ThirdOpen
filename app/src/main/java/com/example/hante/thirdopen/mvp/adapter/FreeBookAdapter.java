@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -38,16 +39,24 @@ public class FreeBookAdapter extends RecyclerView.Adapter<FreeBookAdapter.FreeBo
     }
 
     @Override
-    public void onBindViewHolder (FreeBookViewHolder holder, int position) {
+    public void onBindViewHolder (final FreeBookViewHolder holder, int position) {
         FreeBook.DataBean.HotBookBean hotBookBean = mHotBookBeen.get(position);
-        String imageUrl = mHotBookBeen.get(position).getImageUrl();
+        String imageUrl = hotBookBean.getImageUrl();
         Glide.with(mContext).load(imageUrl)
                 .placeholder(R.mipmap.nocover)
                 .error(R.mipmap.nocover)
                 .into(holder.mIcon);
         holder.mDesc.setText(hotBookBean.getIntroduction());
-        holder.mAuther.setText(hotBookBean.getAuthor());
+        holder.mBooker.setText(hotBookBean.getAuthor());
         holder.mName.setText(hotBookBean.getBookName());
+        holder.mLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick (View view) {
+                if (mOnItemClickListener != null){
+                    mOnItemClickListener.onItemClick(view, holder.getLayoutPosition());
+                }
+            }
+        });
     }
 
     @Override
@@ -55,7 +64,7 @@ public class FreeBookAdapter extends RecyclerView.Adapter<FreeBookAdapter.FreeBo
         return mHotBookBeen.size();
     }
 
-    private interface onItemClickListener{
+    public interface onItemClickListener{
         void onItemClick (View view, int position);
     }
     public void setOnItemClickListener(onItemClickListener onItemClickListener){
@@ -63,13 +72,14 @@ public class FreeBookAdapter extends RecyclerView.Adapter<FreeBookAdapter.FreeBo
     }
     class FreeBookViewHolder extends RecyclerView.ViewHolder{
         private ImageView mIcon;
-        private TextView mName, mAuther, mDesc;
-
+        private TextView mName, mBooker, mDesc;
+        private LinearLayout mLayout;
         public FreeBookViewHolder (View itemView) {
             super(itemView);
+            mLayout = (LinearLayout)itemView.findViewById(R.id.item_linearLayout);
             mIcon = (ImageView)itemView.findViewById(R.id.book_icon);
             mName = (TextView)itemView.findViewById(R.id.book_name);
-            mAuther = (TextView)itemView.findViewById(R.id.book_auther);
+            mBooker = (TextView)itemView.findViewById(R.id.book_auther);
             mDesc = (TextView)itemView.findViewById(R.id.book_desc);
         }
     }

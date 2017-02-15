@@ -40,7 +40,7 @@ public class BookPresenter implements BasePresenter<FreeBook> {
             mHotBook.setIntroduction(newBookBean.getIntroduction());
             hotBook.add(mHotBook);
         }
-        mBookView.newDatas(hotBook);
+        mBookView.newFreeBooks(hotBook);
         mBookView.setBanner(banner);
     }
 

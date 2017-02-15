@@ -12,7 +12,7 @@ import retrofit2.http.GET;
 public interface NetInterface {
 
     // FreeBook
-    // 获取首页详情  http://mylance.top/api/getHomeInfo
+    // 获取首页详情
     @GET("api/getHomeInfo")
     Observable<FreeBook> getHomeInfo();
 

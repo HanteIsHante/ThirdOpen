@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:id="@+id/bottom_view"
-              android:visibility="gone"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
-              android:layout_height="wrap_content">
-
+              android:layout_height="46dp"
+              android:gravity="center"
+              android:minHeight="46dp"
+              android:orientation="horizontal">
+    <ProgressBar
+        android:id="@+id/pb_footer"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp" />
     <TextView
-        android:layout_centerInParent="true"
+        android:id="@+id/tv_footer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/bottom_text"
-        android:textColor="?android:attr/textColorSecondaryNoDisable"/>
-</RelativeLayout>
+        android:text="@string/is_loading" />
+</LinearLayout>

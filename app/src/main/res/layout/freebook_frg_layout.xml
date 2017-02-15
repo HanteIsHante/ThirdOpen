@@ -30,6 +30,4 @@
         </LinearLayout>
     </ScrollView>
     </android.support.v4.widget.SwipeRefreshLayout>
-    <include
-        layout="@layout/bottom_view"/>
 </LinearLayout>

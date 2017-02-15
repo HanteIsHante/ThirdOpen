@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface BookView  extends BaseView{
 
-    void newDatas (List<FreeBook.DataBean.HotBookBean> book);
+    void newFreeBooks (List<FreeBook.DataBean.HotBookBean> book);
 
     void showFailMsg (String msg);
 
