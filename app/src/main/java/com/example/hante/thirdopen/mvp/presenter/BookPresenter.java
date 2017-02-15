@@ -33,7 +33,9 @@ public class BookPresenter implements BasePresenter<FreeBook> {
         FreeBook.DataBean.HotBookBean mHotBook;
         for(FreeBook.DataBean.NewBookBean newBookBean : newBook) {
             mHotBook = new FreeBook.DataBean.HotBookBean();
-            mHotBook.setImageUrl(newBookBean.getImageUrl());
+            if(newBookBean.getImageUrl() != null) {
+                mHotBook.setImageUrl(newBookBean.getImageUrl());
+            }
             mHotBook.setId(newBookBean.getId());
             mHotBook.setAuthor(newBookBean.getAuthor());
             mHotBook.setBookName(newBookBean.getBookName());
