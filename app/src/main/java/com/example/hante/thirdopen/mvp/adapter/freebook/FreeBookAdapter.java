@@ -43,19 +43,18 @@ public class FreeBookAdapter extends RecyclerView.Adapter<FreeBookAdapter.FreeBo
 
     @Override
     public void onBindViewHolder (final FreeBookAdapter.FreeBookViewHolder holder, int position) {
-        final FreeBookViewHolder freeBookViewHolder = (FreeBookViewHolder) holder;
         FreeBook.DataBean.HotBookBean hotBookBean = mHotBookBeen.get(position);
         if(hotBookBean.getImageUrl() != null) {
             String imageUrl = hotBookBean.getImageUrl();
             Glide.with(mContext).load(imageUrl)
                     .placeholder(R.mipmap.nocover)
                     .error(R.mipmap.nocover)
-                    .into(freeBookViewHolder.mIcon);
+                    .into(holder.mIcon);
         }
-        freeBookViewHolder.mDesc.setText(hotBookBean.getIntroduction());
-        freeBookViewHolder.mBooker.setText(hotBookBean.getAuthor());
-        freeBookViewHolder.mName.setText(hotBookBean.getBookName());
-        freeBookViewHolder.mLayout.setOnClickListener(new View.OnClickListener() {
+        holder.mDesc.setText(hotBookBean.getIntroduction());
+        holder.mBooker.setText(hotBookBean.getAuthor());
+        holder.mName.setText(hotBookBean.getBookName());
+        holder.mLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View view) {
                 if(mOnItemClickListener != null) {
@@ -80,7 +79,7 @@ public class FreeBookAdapter extends RecyclerView.Adapter<FreeBookAdapter.FreeBo
         private ImageView mIcon;
         private TextView mName, mBooker, mDesc;
         private LinearLayout mLayout;
-        public FreeBookViewHolder (View itemView) {
+        FreeBookViewHolder (View itemView) {
             super(itemView);
             mLayout = (LinearLayout)itemView.findViewById(R.id.item_linearLayout);
             mIcon = (ImageView)itemView.findViewById(R.id.book_icon);
