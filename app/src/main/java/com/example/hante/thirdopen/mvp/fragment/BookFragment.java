@@ -40,7 +40,6 @@ public class BookFragment extends Fragment implements BookView, SwipeRefreshLayo
     @BindView(R.id.banner_freeBook)
     Banner mBannerFreeBook;
     private BookPresenter mBookPresenter;
-    private FreeBookAdapter mFreeBookAdapter;
     @Override
     public void onCreate (@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,7 +84,7 @@ public class BookFragment extends Fragment implements BookView, SwipeRefreshLayo
     public void newFreeBooks (List<FreeBook.DataBean.HotBookBean> book) {
         // 更新UI
         if(book != null) {
-            mFreeBookAdapter = new FreeBookAdapter(getActivity(), book);
+            FreeBookAdapter mFreeBookAdapter = new FreeBookAdapter(getActivity(), book);
             mRecyclerViewFreeBook.setAdapter(mFreeBookAdapter);
             mFreeBookRefresh.setRefreshing(false);
             mFreeBookAdapter.setOnItemClickListener(this);
@@ -116,5 +115,6 @@ public class BookFragment extends Fragment implements BookView, SwipeRefreshLayo
     @Override
     public void onItemClick (View view, int position) {
         Toast.makeText(getActivity(), "click " + position, Toast.LENGTH_SHORT).show();
+        // 跳转详情页，传值
     }
 }
