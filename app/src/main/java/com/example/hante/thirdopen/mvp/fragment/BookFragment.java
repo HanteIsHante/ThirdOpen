@@ -2,17 +2,15 @@ package com.example.hante.thirdopen.mvp.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.hante.thirdopen.R;
+import com.example.hante.thirdopen.base.LazyFragment;
 import com.example.hante.thirdopen.custome.GlideImageLoader;
 import com.example.hante.thirdopen.mvp.adapter.freebook.FreeBookAdapter;
 import com.example.hante.thirdopen.mvp.entry.freebook.FreeBook;
@@ -23,39 +21,45 @@ import com.youth.banner.Banner;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 /**
  * Created By HanTe
  * 操控presenter 获取数据
  */
 
-public class BookFragment extends Fragment implements BookView, SwipeRefreshLayout.OnRefreshListener, FreeBookAdapter.onItemClickListener {
-
-    @BindView(R.id.recyclerView_freeBook)
+public class BookFragment extends LazyFragment implements BookView, SwipeRefreshLayout.OnRefreshListener,
+        FreeBookAdapter.onItemClickListener {
+    public static final String INTENT_INT_INDEX = "index";
     RecyclerView mRecyclerViewFreeBook;
-    @BindView(R.id.freeBook_refresh)
     SwipeRefreshLayout mFreeBookRefresh;
-    @BindView(R.id.banner_freeBook)
     Banner mBannerFreeBook;
     private BookPresenter mBookPresenter;
+
+    public BookFragment newInstance (int tabIndex, boolean isLazyLoad) {
+        Bundle args = new Bundle();
+        args.putInt(INTENT_INT_INDEX, tabIndex);
+        args.putBoolean(LazyFragment.INTENT_BOOLEAN_LAZYLOAD, isLazyLoad);
+        BookFragment fragment = new BookFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
     public void onCreate (@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBookPresenter = new BookPresenter(this);
     }
 
-    @Nullable
     @Override
-    public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.freebook_frg_layout, container, false);
-        ButterKnife.bind(this, v);
+    public void onCreateViwLazy (Bundle savedInstanceState) {
+        super.onCreateViwLazy(savedInstanceState);
+        setContentView(R.layout.freebook_frg_layout);
         initUI();
-        return v;
     }
 
     private void initUI () {
+        mRecyclerViewFreeBook = (RecyclerView)findViewById(R.id.recyclerView_freeBook);
+        mFreeBookRefresh = (SwipeRefreshLayout)findViewById(R.id.freeBook_refresh);
+        mBannerFreeBook = (Banner)findViewById(R.id.banner_freeBook);
         mFreeBookRefresh.setOnRefreshListener(this);
         mFreeBookRefresh.post(new Runnable() {
             @Override

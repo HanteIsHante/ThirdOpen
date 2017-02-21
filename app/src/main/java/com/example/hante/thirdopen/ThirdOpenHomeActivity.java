@@ -44,10 +44,10 @@ public class ThirdOpenHomeActivity extends AppCompatActivity {
         //---
         List<Fragment> mFragmentList = new ArrayList<>();
         List<String> mStringList = new ArrayList<>();
-        BookFragment mBookFragment;
+        BookFragment mBookFragment = new BookFragment();
         for(int i = 0; i < 6; i++) {
             mBookFragment = new BookFragment();
-            mFragmentList.add(mBookFragment);
+            mFragmentList.add(mBookFragment.newInstance(i, true));
         }
         mStringList.add("免费书籍");
         mStringList.add("豆瓣");
