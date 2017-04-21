@@ -41,13 +41,12 @@ public class ThirdOpenHomeActivity extends AppCompatActivity {
         }
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        //---
         List<Fragment> mFragmentList = new ArrayList<>();
         List<String> mStringList = new ArrayList<>();
-        BookFragment mBookFragment = new BookFragment();
+        BookFragment mBookFragment = null;
         for(int i = 0; i < 6; i++) {
             mBookFragment = new BookFragment();
-            mFragmentList.add(mBookFragment.newInstance(i, true));
+            mFragmentList.add(mBookFragment);
         }
         mStringList.add("免费书籍");
         mStringList.add("豆瓣");

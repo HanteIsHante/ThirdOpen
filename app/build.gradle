@@ -13,7 +13,8 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true  // 会告诉 proguard 删除所有未使用的方法和指令，进一步的减少 .dex 文件的大小。
+            shrinkResources true   // 设置 shrinkResources 属性为 true，这会在打包时删除未使用的资源：
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
