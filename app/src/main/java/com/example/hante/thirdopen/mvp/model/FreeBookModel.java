@@ -3,6 +3,7 @@ package com.example.hante.thirdopen.mvp.model;
 import com.example.hante.thirdopen.contract.Contract;
 import com.example.hante.thirdopen.mvp.BasePresenter;
 import com.example.hante.thirdopen.mvp.entry.freebook.FreeBook;
+import com.example.hante.thirdopen.mvp.entry.freebook.FreeBookInfo;
 import com.example.hante.thirdopen.net.NetInterface;
 import com.example.hante.thirdopen.net.Network;
 import com.example.hante.thirdopen.util.LogUtils;
@@ -51,6 +52,30 @@ public class FreeBookModel extends Network{
         }
     }
 
+    public static void getFreeBookInfo (int id) {
+        netInterface.getBookInfo(id).subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<FreeBookInfo>() {
+                    @Override
+                    public void onSubscribe (Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext (FreeBookInfo freeBookInfo) {
+                        LogUtils.a(freeBookInfo);
+                    }
+
+                    @Override
+                    public void onError (Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete () {
+                    }
+                });
+    }
     /**
      * 取消网络请求
      */

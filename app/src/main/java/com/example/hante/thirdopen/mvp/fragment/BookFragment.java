@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.hante.thirdopen.R;
+import com.example.hante.thirdopen.activity.BookInfoActivity;
 import com.example.hante.thirdopen.custome.GlideImageLoader;
 import com.example.hante.thirdopen.mvp.adapter.freebook.FreeBookAdapter;
 import com.example.hante.thirdopen.mvp.entry.freebook.FreeBook;
@@ -116,10 +117,8 @@ public class BookFragment extends Fragment implements BookView, SwipeRefreshLayo
 
     @Override
     public void onItemClick (View view, int position) {
-        Toast.makeText(getActivity(), "click " + position, Toast.LENGTH_SHORT).show();
         // 跳转详情页，传值
-
-
-
+        Toast.makeText(getActivity(), "click book id" + position, Toast.LENGTH_SHORT).show();
+        BookInfoActivity.setId(getActivity(), position);
     }
 }
