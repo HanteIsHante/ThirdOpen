@@ -4,9 +4,9 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
+import com.example.hante.thirdopen.base.BaseActivity;
 import com.example.hante.thirdopen.mvp.fragment.BookFragment;
 
 import java.util.ArrayList;
@@ -15,7 +15,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ThirdOpenHomeActivity extends AppCompatActivity {
+public class ThirdOpenHomeActivity extends BaseActivity {
 
     @BindView(R.id.toolbar_home)
     Toolbar mToolbarHome;

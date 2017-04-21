@@ -30,7 +30,7 @@ public class BookInfoActivity extends BaseActivity {
     @BindView(R.id.book_auth)
     TextView bookAuth;
     @BindView(R.id.booktype)
-    TextView booktype;
+    TextView bookype;
     @BindView(R.id.book_progress)
     TextView bookProgress;
     @BindView(R.id.download)

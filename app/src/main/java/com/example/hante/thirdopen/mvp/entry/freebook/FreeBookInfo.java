@@ -8,10 +8,11 @@ import java.io.Serializable;
 
 public class FreeBookInfo implements Serializable {
 
+
     /**
-     * data : {"bookImageUrl":"http://img.txt99.cc/Cover/40/40452.jpg","bookName":"盛世嫡宠","bookAuthor":"作者：三则","bookType":"分类：言情小说","bookLength":"字数：752773字","bookProgress":"进度：已完结","bookUpdateTime":"更新：2017-02-14 09:22","bookDownload":"http://www.txt99.cc/home/down/txt/id/40452","bookIntroduction":"&nbsp;&nbsp;&nbsp;&nbsp;身为国公府的嫡长孙女却被人陷害，名誉扫地，最后落得一席粉妆一台小轿从后门入府成为御亲王妾室的下场。 <br> &nbsp;&nbsp;&nbsp;&nbsp;两年后继母所生的妹妹成奕琦嫁入王府成为了王府的女主人。 <br> &nbsp;&nbsp;&nbsp;&nbsp;她告诉她：\u201c你一辈子就该被我踩在脚下！\u201d <br> &nbsp;&nbsp;&nbsp;&nbsp;他告诉她：\u201c你不配怀我的孩子！\u201d <br> &nbsp;&nbsp;&nbsp;&nbsp;重生一世，成奕瑶告诉自己：\u201c上辈子的事我可以当做黄粱一梦，但这辈子绝不再心慈手软，算计我的人一个都不会放过！\u201d"}
+     * data : {"bookImageUrl":"http://img.txt99.cc/Cover/41/41187.jpg","bookName":"医品娘子：夫人，求圆房","bookAuthor":"作者：司药娘子","bookType":"分类：穿越小说","bookLength":"字数：2644761字","bookProgress":"进度：已完结","bookUpdateTime":"更新：2017-04-20 09:10","bookDownload":"http://www.txt99.cc/home/down/txt/id/41187","bookIntroduction":"&nbsp;&nbsp;&nbsp;&nbsp;学医有成，事业得意，一醉穿越成冲喜小新娘！\n<br> &nbsp;&nbsp;&nbsp;&nbsp;什么，要为夫殉葬？有姐在，死不了！\n<br> &nbsp;&nbsp;&nbsp;&nbsp;辣手婆婆，黑心哥嫂，还有老奸巨猾的婆子，美貌娇俏的丫头\u2026各使手段，乱斗心机！\n<br> &nbsp;&nbsp;&nbsp;&nbsp;她一抬手，轻飘飘一句，\u201c无聊！\u201d\n<br> &nbsp;&nbsp;&nbsp;&nbsp;使小计宅门脱身，姐要活的自在恣意！\n<br> &nbsp;&nbsp;&nbsp;&nbsp;万贯家财信手拈来，妖孽型男呼喝来去，捻一杯小酒，听弦歌小曲儿，乐不知归之际，一清秀书生施施然走来\u2014\u2014\n<br> &nbsp;&nbsp;&nbsp;&nbsp;娘子，回家圆房！\n<br> &nbsp;&nbsp;&nbsp;&nbsp;作品标签： 爽文、神医、张扬、女强、炮灰逆袭"}
      * code : 1
-     * requestTime : 2017-02-14 19:58:23
+     * requestTime : 2017-04-21 20:30:44
      */
 
     private DataBean data;
@@ -42,17 +43,33 @@ public class FreeBookInfo implements Serializable {
         this.requestTime = requestTime;
     }
 
+    @Override
+    public String toString () {
+        return "FreeBookInfo{" +
+                "data=" + data +
+                ", code=" + code +
+                ", requestTime='" + requestTime + '\'' +
+                '}';
+    }
+
     public static class DataBean {
         /**
-         * bookImageUrl : http://img.txt99.cc/Cover/40/40452.jpg
-         * bookName : 盛世嫡宠
-         * bookAuthor : 作者：三则
-         * bookType : 分类：言情小说
-         * bookLength : 字数：752773字
+         * bookImageUrl : http://img.txt99.cc/Cover/41/41187.jpg
+         * bookName : 医品娘子：夫人，求圆房
+         * bookAuthor : 作者：司药娘子
+         * bookType : 分类：穿越小说
+         * bookLength : 字数：2644761字
          * bookProgress : 进度：已完结
-         * bookUpdateTime : 更新：2017-02-14 09:22
-         * bookDownload : http://www.txt99.cc/home/down/txt/id/40452
-         * bookIntroduction : &nbsp;&nbsp;&nbsp;&nbsp;身为国公府的嫡长孙女却被人陷害，名誉扫地，最后落得一席粉妆一台小轿从后门入府成为御亲王妾室的下场。 <br> &nbsp;&nbsp;&nbsp;&nbsp;两年后继母所生的妹妹成奕琦嫁入王府成为了王府的女主人。 <br> &nbsp;&nbsp;&nbsp;&nbsp;她告诉她：“你一辈子就该被我踩在脚下！” <br> &nbsp;&nbsp;&nbsp;&nbsp;他告诉她：“你不配怀我的孩子！” <br> &nbsp;&nbsp;&nbsp;&nbsp;重生一世，成奕瑶告诉自己：“上辈子的事我可以当做黄粱一梦，但这辈子绝不再心慈手软，算计我的人一个都不会放过！”
+         * bookUpdateTime : 更新：2017-04-20 09:10
+         * bookDownload : http://www.txt99.cc/home/down/txt/id/41187
+         * bookIntroduction : &nbsp;&nbsp;&nbsp;&nbsp;学医有成，事业得意，一醉穿越成冲喜小新娘！
+         <br> &nbsp;&nbsp;&nbsp;&nbsp;什么，要为夫殉葬？有姐在，死不了！
+         <br> &nbsp;&nbsp;&nbsp;&nbsp;辣手婆婆，黑心哥嫂，还有老奸巨猾的婆子，美貌娇俏的丫头…各使手段，乱斗心机！
+         <br> &nbsp;&nbsp;&nbsp;&nbsp;她一抬手，轻飘飘一句，“无聊！”
+         <br> &nbsp;&nbsp;&nbsp;&nbsp;使小计宅门脱身，姐要活的自在恣意！
+         <br> &nbsp;&nbsp;&nbsp;&nbsp;万贯家财信手拈来，妖孽型男呼喝来去，捻一杯小酒，听弦歌小曲儿，乐不知归之际，一清秀书生施施然走来——
+         <br> &nbsp;&nbsp;&nbsp;&nbsp;娘子，回家圆房！
+         <br> &nbsp;&nbsp;&nbsp;&nbsp;作品标签： 爽文、神医、张扬、女强、炮灰逆袭
          */
 
         private String bookImageUrl;
@@ -136,14 +153,20 @@ public class FreeBookInfo implements Serializable {
         public void setBookIntroduction (String bookIntroduction) {
             this.bookIntroduction = bookIntroduction;
         }
-    }
 
-    @Override
-    public String toString () {
-        return "FreeBookInfo{" +
-                "data=" + data +
-                ", code=" + code +
-                ", requestTime='" + requestTime + '\'' +
-                '}';
+        @Override
+        public String toString () {
+            return "DataBean{" +
+                    "bookImageUrl='" + bookImageUrl + '\'' +
+                    ", bookName='" + bookName + '\'' +
+                    ", bookAuthor='" + bookAuthor + '\'' +
+                    ", bookType='" + bookType + '\'' +
+                    ", bookLength='" + bookLength + '\'' +
+                    ", bookProgress='" + bookProgress + '\'' +
+                    ", bookUpdateTime='" + bookUpdateTime + '\'' +
+                    ", bookDownload='" + bookDownload + '\'' +
+                    ", bookIntroduction='" + bookIntroduction + '\'' +
+                    '}';
+        }
     }
 }

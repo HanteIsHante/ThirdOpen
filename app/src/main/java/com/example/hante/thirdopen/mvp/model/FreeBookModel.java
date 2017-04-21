@@ -63,7 +63,8 @@ public class FreeBookModel extends Network{
 
                     @Override
                     public void onNext (FreeBookInfo freeBookInfo) {
-                        LogUtils.a(freeBookInfo);
+                        LogUtils.a(freeBookInfo.toString());
+
                     }
 
                     @Override
