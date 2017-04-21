@@ -9,11 +9,11 @@ public class Contract {
 
 
 
-    public static final String FREEBOOK_BASE_URL = "http://mylance.top/";
+    public static final String FreeBook_Base_Url = "http://mylance.top/";
 
-    public static final String ZHIHU_BASE_URL = "";
+    public static final String ZhiHu_Base_Url = "";
 
-    public static final String DOUBAN_BASE_URL = "https://api.douban.com/v2/";
+    public static final String DouBan_Base_Url = "https://api.douban.com/v2/";
 
     //data/all/{条数}/{page}
     public static final String GITHUB_BASE_URL = "http://www.gank.io/api/data/all/";

@@ -20,7 +20,7 @@ import io.reactivex.schedulers.Schedulers;
 public class FreeBookModel extends Network{
     private FreeBook mFreeBook;
     private static final NetInterface netInterface =
-            getRetrofit(Contract.FREEBOOK_BASE_URL).create(NetInterface.class);
+            getRetrofit(Contract.FreeBook_Base_Url).create(NetInterface.class);
     private Disposable mDisposable;
 
     public void loadBookData (boolean fresh, final BasePresenter basePresenter){
