@@ -1,19 +1,16 @@
 package com.example.hante.thirdopen.mvp.model;
 
-import android.util.Log;
-
-import com.example.hante.thirdopen.base.BasePresenter;
 import com.example.hante.thirdopen.contract.Contract;
+import com.example.hante.thirdopen.mvp.BasePresenter;
 import com.example.hante.thirdopen.mvp.entry.freebook.FreeBook;
 import com.example.hante.thirdopen.net.NetInterface;
 import com.example.hante.thirdopen.net.Network;
+import com.example.hante.thirdopen.util.LogUtils;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-
-import static android.content.ContentValues.TAG;
 
 /**
  * Created By HanTe
@@ -22,9 +19,10 @@ import static android.content.ContentValues.TAG;
 
 public class FreeBookModel extends Network{
     private FreeBook mFreeBook;
-    protected static final NetInterface netInterface =
+    private static final NetInterface netInterface =
             getRetrofit(Contract.FREEBOOK_BASE_URL).create(NetInterface.class);
     private Disposable mDisposable;
+
     public void loadBookData (boolean fresh, final BasePresenter basePresenter){
         if (fresh){
             netInterface.getHomeInfo()
@@ -46,7 +44,7 @@ public class FreeBookModel extends Network{
 
                         @Override
                         public void onComplete () {
-                            Log.d(TAG, "onNext: " + mFreeBook.toString());
+                            LogUtils.json(mFreeBook.toString());
                             basePresenter.onSuccess(mFreeBook);
                         }
                     });

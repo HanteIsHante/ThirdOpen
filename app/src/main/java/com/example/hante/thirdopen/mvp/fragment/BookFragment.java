@@ -16,7 +16,7 @@ import com.example.hante.thirdopen.R;
 import com.example.hante.thirdopen.custome.GlideImageLoader;
 import com.example.hante.thirdopen.mvp.adapter.freebook.FreeBookAdapter;
 import com.example.hante.thirdopen.mvp.entry.freebook.FreeBook;
-import com.example.hante.thirdopen.mvp.presenter.BookPresenter;
+import com.example.hante.thirdopen.mvp.presenter.BookBusinessPresenter;
 import com.example.hante.thirdopen.mvp.view.BookView;
 import com.youth.banner.Banner;
 
@@ -33,12 +33,12 @@ public class BookFragment extends Fragment implements BookView, SwipeRefreshLayo
     RecyclerView mRecyclerViewFreeBook;
     SwipeRefreshLayout mFreeBookRefresh;
     Banner mBannerFreeBook;
-    private BookPresenter mBookPresenter;
+    private BookBusinessPresenter mBookPresenter;
 
     @Override
     public void onCreate (@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBookPresenter = new BookPresenter(this);
+        mBookPresenter = new BookBusinessPresenter(this);
     }
 
     @Nullable
@@ -69,12 +69,16 @@ public class BookFragment extends Fragment implements BookView, SwipeRefreshLayo
         mRecyclerViewFreeBook.setNestedScrollingEnabled(false);//ScrollView 嵌套 RecycleView 滑动卡顿
     }
 
+    @Override
+    public void onStop () {
+        super.onStop();
+        // 销毁
+        mBookPresenter.stopRequest();
+    }
 
     @Override
     public void onDestroy () {
         super.onDestroy();
-        // 销毁
-        mBookPresenter.stopRequest();
     }
 
 
@@ -114,5 +118,8 @@ public class BookFragment extends Fragment implements BookView, SwipeRefreshLayo
     public void onItemClick (View view, int position) {
         Toast.makeText(getActivity(), "click " + position, Toast.LENGTH_SHORT).show();
         // 跳转详情页，传值
+
+
+
     }
 }
