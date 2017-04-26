@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--1、always：使菜单项一直显示在ToolBar上。-->
+<!--2、ifRoom：如果有足够的空间，这个值会使菜单项显示在ToolBar上。-->
+<!--3、never：使菜单项永远都不出现在ToolBar上,在…的子项中显示。-->
+<!--4、withText：使菜单项和它的图标，菜单文本一起显示。 -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_edit"
+        android:icon="@mipmap/ic_launcher"
+        android:orderInCategory="80"
+        android:title="@string/app_name"
+        app:showAsAction="never"/>
+
+    <!--点击这个图标展开搜索-->
+    <item
+        android:id="@+id/action_search"
+        android:icon="@drawable/ic_search"
+        android:orderInCategory="90"
+        android:title="@string/app_name"
+        app:actionViewClass="android.support.v7.widget.SearchView"
+        app:showAsAction="collapseActionView|ifRoom"
+        />
+
+    <!--这两item是隐藏在右上角三个圆点里面的-->
+    <item
+        android:id="@+id/item1"
+        android:title="@string/app_name"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/item2"
+        android:title="@string/app_name"
+        app:showAsAction="never"/>
+</menu>
