@@ -3,6 +3,8 @@ package com.example.hante.thirdopen.application;
 import android.app.Activity;
 import android.app.Application;
 
+import com.example.hante.thirdopen.util.LogUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +24,9 @@ public class MyApplication extends Application {
     public void onCreate () {
         super.onCreate();
         instance = this;
+
+        new LogUtils.Builder();
+
     }
 
     /**
@@ -93,6 +98,4 @@ public class MyApplication extends Application {
         }
         System.exit(0);
     }
-
-
 }

@@ -1,6 +1,6 @@
 package com.example.hante.thirdopen.mvp.presenter;
 
-import com.example.hante.thirdopen.base.BasePresenter;
+import com.example.hante.thirdopen.mvp.BasePresenter;
 import com.example.hante.thirdopen.mvp.entry.freebook.FreeBook;
 import com.example.hante.thirdopen.mvp.model.FreeBookModel;
 import com.example.hante.thirdopen.mvp.view.BookView;
@@ -11,10 +11,10 @@ import java.util.List;
  * Created By HanTe
  */
 
-public class BookPresenter implements BasePresenter<FreeBook> {
+public class BookBusinessPresenter implements BasePresenter<FreeBook> {
     private BookView mBookView;
     private FreeBookModel mFreeBookModel;
-    public BookPresenter (BookView view) {
+    public BookBusinessPresenter (BookView view) {
         this.mBookView = view;
         this.mFreeBookModel = new FreeBookModel();
     }

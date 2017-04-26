@@ -1,4 +1,4 @@
-package com.example.hante.thirdopen.base;
+package com.example.hante.thirdopen.mvp;
 
 /**
  * Created By HanTe
@@ -7,7 +7,7 @@ package com.example.hante.thirdopen.base;
 
 public interface BasePresenter<T> {
 
-    void onSuccess(T data);
-    void onFail(String msg);
+    void onSuccess (T data);
+    void onFail (String msg);
 
 }

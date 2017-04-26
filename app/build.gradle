@@ -2,10 +2,10 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.jakewharton.butterknife'
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.0"
+    buildToolsVersion "25.0.2"
     defaultConfig {
         applicationId "com.example.hante.thirdopen"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -13,7 +13,8 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true  // 会告诉 proguard 删除所有未使用的方法和指令，进一步的减少 .dex 文件的大小。
+            shrinkResources true   // 设置 shrinkResources 属性为 true，这会在打包时删除未使用的资源：
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -24,8 +25,12 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.0.1'
     testCompile 'junit:junit:4.12'
+
+    // 最新更新
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:design:25.3.1'
+    compile 'com.android.support:support-dynamic-animation:25.3.1'
 
     // butterknife
     dependencies {
@@ -45,8 +50,6 @@ dependencies {
     //okhttp
     compile 'com.squareup.okhttp3:okhttp:3.5.0'
 
-    // Design
-    compile 'com.android.support:design:25.0.1'
 
     // 添加 ConstraintLayout 约束布局
     compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'

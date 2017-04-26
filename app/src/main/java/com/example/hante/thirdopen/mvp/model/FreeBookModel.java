@@ -1,19 +1,17 @@
 package com.example.hante.thirdopen.mvp.model;
 
-import android.util.Log;
-
-import com.example.hante.thirdopen.base.BasePresenter;
 import com.example.hante.thirdopen.contract.Contract;
+import com.example.hante.thirdopen.mvp.BasePresenter;
 import com.example.hante.thirdopen.mvp.entry.freebook.FreeBook;
+import com.example.hante.thirdopen.mvp.entry.freebook.FreeBookInfo;
 import com.example.hante.thirdopen.net.NetInterface;
 import com.example.hante.thirdopen.net.Network;
+import com.example.hante.thirdopen.util.LogUtils;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-
-import static android.content.ContentValues.TAG;
 
 /**
  * Created By HanTe
@@ -22,9 +20,10 @@ import static android.content.ContentValues.TAG;
 
 public class FreeBookModel extends Network{
     private FreeBook mFreeBook;
-    protected static final NetInterface netInterface =
-            getRetrofit(Contract.FREEBOOK_BASE_URL).create(NetInterface.class);
+    private static final NetInterface netInterface =
+            getRetrofit(Contract.FreeBook_Base_Url).create(NetInterface.class);
     private Disposable mDisposable;
+
     public void loadBookData (boolean fresh, final BasePresenter basePresenter){
         if (fresh){
             netInterface.getHomeInfo()
@@ -46,13 +45,38 @@ public class FreeBookModel extends Network{
 
                         @Override
                         public void onComplete () {
-                            Log.d(TAG, "onNext: " + mFreeBook.toString());
+                            LogUtils.json(mFreeBook.toString());
                             basePresenter.onSuccess(mFreeBook);
                         }
                     });
         }
     }
 
+    public static void getFreeBookInfo (int id) {
+        netInterface.getBookInfo(id).subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<FreeBookInfo>() {
+                    @Override
+                    public void onSubscribe (Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext (FreeBookInfo freeBookInfo) {
+                        LogUtils.a(freeBookInfo.toString());
+
+                    }
+
+                    @Override
+                    public void onError (Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete () {
+                    }
+                });
+    }
     /**
      * 取消网络请求
      */

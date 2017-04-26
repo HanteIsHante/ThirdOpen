@@ -13,50 +13,48 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.hante.thirdopen.R;
+import com.example.hante.thirdopen.activity.BookInfoActivity;
 import com.example.hante.thirdopen.custome.GlideImageLoader;
-import com.example.hante.thirdopen.mvp.adapter.FreeBookAdapter;
+import com.example.hante.thirdopen.mvp.adapter.freebook.FreeBookAdapter;
 import com.example.hante.thirdopen.mvp.entry.freebook.FreeBook;
-import com.example.hante.thirdopen.mvp.presenter.BookPresenter;
+import com.example.hante.thirdopen.mvp.presenter.BookBusinessPresenter;
 import com.example.hante.thirdopen.mvp.view.BookView;
 import com.youth.banner.Banner;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 /**
  * Created By HanTe
  * 操控presenter 获取数据
  */
 
-public class BookFragment extends Fragment implements BookView, SwipeRefreshLayout.OnRefreshListener, FreeBookAdapter.onItemClickListener {
-
-    @BindView(R.id.recyclerView_freeBook)
+public class BookFragment extends Fragment implements BookView, SwipeRefreshLayout.OnRefreshListener,
+        FreeBookAdapter.onItemClickListener {
     RecyclerView mRecyclerViewFreeBook;
-    @BindView(R.id.freeBook_refresh)
     SwipeRefreshLayout mFreeBookRefresh;
-    @BindView(R.id.banner_freeBook)
     Banner mBannerFreeBook;
-    private BookPresenter mBookPresenter;
-    private FreeBookAdapter mFreeBookAdapter;
+    private BookBusinessPresenter mBookPresenter;
+
     @Override
     public void onCreate (@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBookPresenter = new BookPresenter(this);
+        mBookPresenter = new BookBusinessPresenter(this);
     }
 
     @Nullable
     @Override
-    public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.freebook_frg_layout, container, false);
-        ButterKnife.bind(this, v);
-        initUI();
-        return v;
+    public View onCreateView (LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View inflate = inflater.inflate(R.layout.freebook_frg_layout, container, false);
+        initUI(inflate);
+        return inflate;
     }
 
-    private void initUI () {
+
+    private void initUI (View inflate) {
+        mRecyclerViewFreeBook = (RecyclerView)inflate.findViewById(R.id.recyclerView_freeBook);
+        mFreeBookRefresh = (SwipeRefreshLayout)inflate.findViewById(R.id.freeBook_refresh);
+        mBannerFreeBook = (Banner)inflate.findViewById(R.id.banner_freeBook);
         mFreeBookRefresh.setOnRefreshListener(this);
         mFreeBookRefresh.post(new Runnable() {
             @Override
@@ -72,12 +70,16 @@ public class BookFragment extends Fragment implements BookView, SwipeRefreshLayo
         mRecyclerViewFreeBook.setNestedScrollingEnabled(false);//ScrollView 嵌套 RecycleView 滑动卡顿
     }
 
+    @Override
+    public void onStop () {
+        super.onStop();
+        // 销毁
+        mBookPresenter.stopRequest();
+    }
 
     @Override
     public void onDestroy () {
         super.onDestroy();
-        // 销毁
-        mBookPresenter.stopRequest();
     }
 
 
@@ -85,8 +87,7 @@ public class BookFragment extends Fragment implements BookView, SwipeRefreshLayo
     public void newFreeBooks (List<FreeBook.DataBean.HotBookBean> book) {
         // 更新UI
         if(book != null) {
-            mFreeBookAdapter = new FreeBookAdapter(getActivity(), book);
-            mFreeBookAdapter.setState(FreeBookAdapter.STATE_HIDE);
+            FreeBookAdapter mFreeBookAdapter = new FreeBookAdapter(getActivity(), book);
             mRecyclerViewFreeBook.setAdapter(mFreeBookAdapter);
             mFreeBookRefresh.setRefreshing(false);
             mFreeBookAdapter.setOnItemClickListener(this);
@@ -116,6 +117,8 @@ public class BookFragment extends Fragment implements BookView, SwipeRefreshLayo
 
     @Override
     public void onItemClick (View view, int position) {
-        Toast.makeText(getActivity(), "click " + position, Toast.LENGTH_SHORT).show();
+        // 跳转详情页，传值
+        Toast.makeText(getActivity(), "click book id" + position, Toast.LENGTH_SHORT).show();
+        BookInfoActivity.setId(getActivity(), position);
     }
 }
