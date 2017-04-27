@@ -1,5 +1,6 @@
 package com.example.hante.thirdopen.mvp.model;
 
+import com.example.hante.thirdopen.activity.PageInterface;
 import com.example.hante.thirdopen.contract.Contract;
 import com.example.hante.thirdopen.mvp.BasePresenter;
 import com.example.hante.thirdopen.mvp.entry.freebook.FreeBook;
@@ -18,14 +19,15 @@ import io.reactivex.schedulers.Schedulers;
  * 获取数据
  */
 
-public class FreeBookModel extends Network{
+public class FreeBookModel extends Network {
     private FreeBook mFreeBook;
     private static final NetInterface netInterface =
             getRetrofit(Contract.FreeBook_Base_Url).create(NetInterface.class);
     private Disposable mDisposable;
+    private static FreeBookInfo mFreeBookInfo;
 
-    public void loadBookData (boolean fresh, final BasePresenter basePresenter){
-        if (fresh){
+    public void loadBookData (boolean fresh, final BasePresenter basePresenter) {
+        if(fresh) {
             netInterface.getHomeInfo()
                     .subscribeOn(Schedulers.newThread())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -34,10 +36,12 @@ public class FreeBookModel extends Network{
                         public void onSubscribe (Disposable d) {
                             mDisposable = d;
                         }
+
                         @Override
                         public void onNext (FreeBook freeBook) {
                             mFreeBook = freeBook;
                         }
+
                         @Override
                         public void onError (Throwable e) {
                             basePresenter.onFail(e.toString());
@@ -52,7 +56,8 @@ public class FreeBookModel extends Network{
         }
     }
 
-    public static void getFreeBookInfo (int id) {
+    public static void getFreeBookInfo (int id, PageInterface pageInterface) {
+        final PageInterface mPageInterface = pageInterface;
         netInterface.getBookInfo(id).subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<FreeBookInfo>() {
@@ -64,6 +69,7 @@ public class FreeBookModel extends Network{
                     @Override
                     public void onNext (FreeBookInfo freeBookInfo) {
                         LogUtils.a(freeBookInfo.toString());
+                        mFreeBookInfo = freeBookInfo;
 
                     }
 
@@ -74,9 +80,11 @@ public class FreeBookModel extends Network{
 
                     @Override
                     public void onComplete () {
+                        mPageInterface.SendData(mFreeBookInfo);
                     }
                 });
     }
+
     /**
      * 取消网络请求
      */
