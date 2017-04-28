@@ -5,6 +5,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.example.hante.thirdopen.util.LogUtils;
+import com.squareup.leakcanary.LeakCanary;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,10 +27,13 @@ public class MyApplication extends Application {
     @Override
     public void onCreate () {
         super.onCreate();
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            return;
+        }
+        LeakCanary.install(this);
         instance = this;
         mContext = getApplicationContext();
         new LogUtils.Builder();
-
     }
 
     /**
