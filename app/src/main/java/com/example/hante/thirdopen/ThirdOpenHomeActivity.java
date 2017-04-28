@@ -29,6 +29,7 @@ public class ThirdOpenHomeActivity extends BaseActivity {
     TabLayout mHomeTabLayout;
     @BindView(R.id.tabLayout_viewpager)
     ViewPager mTabLayoutViewpager;
+
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +50,7 @@ public class ThirdOpenHomeActivity extends BaseActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         List<Fragment> mFragmentList = new ArrayList<>();
         List<String> mStringList = new ArrayList<>();
-        BookFragment mBookFragment = null;
+        BookFragment mBookFragment;
         for(int i = 0; i < 6; i++) {
             mBookFragment = new BookFragment();
             mFragmentList.add(mBookFragment);
@@ -74,26 +75,27 @@ public class ThirdOpenHomeActivity extends BaseActivity {
     @Override
     public boolean onCreateOptionsMenu (Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
-        /**
-         * 搜索按钮的相关逻辑
-         * */
-        MenuItem menuItem=menu.findItem(R.id.action_search);//
-        SearchView searchView= (SearchView) MenuItemCompat.getActionView(menuItem);//加载searchview
+        /*
+          搜索按钮的相关逻辑
+          */
+        MenuItem menuItem = menu.findItem(R.id.action_search);//
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);//加载searchview
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public boolean onQueryTextSubmit(String query) {
+            public boolean onQueryTextSubmit (String query) {
                 Toast.makeText(ThirdOpenHomeActivity.this, query, Toast.LENGTH_SHORT).show();
                 return true;
             }
 
             @Override
-            public boolean onQueryTextChange(String newText) {
-                if (TextUtils.isEmpty((newText))){
-                    Toast.makeText(ThirdOpenHomeActivity.this,"isEmpty",Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(ThirdOpenHomeActivity.this, newText,Toast.LENGTH_SHORT).show();
+            public boolean onQueryTextChange (String newText) {
+                if(TextUtils.isEmpty((newText))) {
+                    Toast.makeText(ThirdOpenHomeActivity.this, "isEmpty", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(ThirdOpenHomeActivity.this, newText, Toast.LENGTH_SHORT).show();
                 }
-                return true;}
+                return true;
+            }
         });//为搜索框设置监听事件
         searchView.setSubmitButtonEnabled(true);//设置是否显示搜索按钮
         searchView.setQueryHint("查找");//设置提示信息
