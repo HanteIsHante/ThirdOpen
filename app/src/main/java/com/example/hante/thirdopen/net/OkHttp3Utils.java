@@ -26,6 +26,7 @@ public class OkHttp3Utils {
                     .connectTimeout(30, TimeUnit.SECONDS)
                     .writeTimeout(30, TimeUnit.SECONDS)
                     .readTimeout(30, TimeUnit.SECONDS)
+                    .addInterceptor(NetCache.interceptor)
                     .cache(cache)  // 缓存设置
                     .build();
 

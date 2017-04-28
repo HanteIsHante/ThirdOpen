@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -96,7 +97,7 @@ public class BookInfoActivity extends BaseActivity implements PageInterface {
         mBookAuth.setText(bookAuthor);
         mBookType.setText(bookType);
         mBookProgress.setText(bookProgress);
-        mBookDesc.setText(bookIntroduction);
+        mBookDesc.setText(Html.fromHtml(bookIntroduction));
         mDownLoad.setText(bookUpdateTime);
         mBookLength.setText(bookLength);
     }

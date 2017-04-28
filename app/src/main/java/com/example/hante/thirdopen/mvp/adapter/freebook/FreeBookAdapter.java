@@ -44,7 +44,7 @@ public class FreeBookAdapter extends RecyclerView.Adapter<FreeBookAdapter.FreeBo
     @Override
     public void onBindViewHolder (final FreeBookAdapter.FreeBookViewHolder holder, int position) {
         final FreeBook.DataBean.HotBookBean hotBookBean = mHotBookBeen.get(position);
-        if(hotBookBean.getImageUrl() != null) {
+        if(hotBookBean.getImageUrl() != null && !"".equalsIgnoreCase(hotBookBean.getImageUrl())) {
             String imageUrl = hotBookBean.getImageUrl();
             Glide.with(mContext).load(imageUrl)
                     .placeholder(R.mipmap.nocover)
