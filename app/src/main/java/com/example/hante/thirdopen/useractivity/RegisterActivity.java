@@ -6,13 +6,19 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-//Execute task initFreeline and download freeline dependencies...
+import android.widget.Toast;
+
+import com.example.hante.greendao.UserDao;
 import com.example.hante.thirdopen.R;
+import com.example.hante.thirdopen.application.MyApplication;
+import com.example.hante.thirdopen.db.bean.User;
 import com.example.hante.thirdopen.util.Utils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+//Execute task initFreeline and download freeline dependencies...
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -26,13 +32,14 @@ public class RegisterActivity extends AppCompatActivity {
     EditText Password;
     @BindView(R.id.button_register)
     Button buttonRegister;
-
+    private UserDao mUserDao;
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         ButterKnife.bind(this);
         initUI();
+        mUserDao = MyApplication.getInstance().getDaoSession().getUserDao();
     }
 
     private void initUI () {
@@ -53,6 +60,19 @@ public class RegisterActivity extends AppCompatActivity {
 
     @OnClick(R.id.button_register)
     public void onClick () {
-        Utils.isNotFastClick();
+        if(Utils.isNotFastClick()) {
+            if(!"".equalsIgnoreCase(Email.getText().toString()) &&
+                    !"".equalsIgnoreCase(Phone.getText().toString()) &&
+                    !"".equalsIgnoreCase(Password.getText().toString())) {
+                User mUser = new User(null, Phone.getText().toString(),
+                        Password.getText().toString(),
+                        Email.getText().toString());
+                mUserDao.insert(mUser);
+                Toast.makeText(this, "注册成功", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        } else {
+            Toast.makeText(this, "点击太频繁", Toast.LENGTH_SHORT).show();
+        }
     }
 }
