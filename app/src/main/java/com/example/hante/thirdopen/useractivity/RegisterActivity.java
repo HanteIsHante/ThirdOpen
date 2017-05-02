@@ -67,9 +67,13 @@ public class RegisterActivity extends AppCompatActivity {
                 User mUser = new User(null, Phone.getText().toString(),
                         Password.getText().toString(),
                         Email.getText().toString());
-                mUserDao.insert(mUser);
-                Toast.makeText(this, "注册成功", Toast.LENGTH_SHORT).show();
-                finish();
+                try {
+                    mUserDao.insert(mUser);
+                    Toast.makeText(this, "注册成功", Toast.LENGTH_SHORT).show();
+                    finish();
+                } catch(Exception e) {
+                    Toast.makeText(this, "注册失败, 请重试!", Toast.LENGTH_SHORT).show();
+                }
             }
         } else {
             Toast.makeText(this, "点击太频繁", Toast.LENGTH_SHORT).show();
