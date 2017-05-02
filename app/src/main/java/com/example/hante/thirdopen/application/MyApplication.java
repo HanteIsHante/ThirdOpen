@@ -27,9 +27,7 @@ public class MyApplication extends Application {
     private static MyApplication instance;
     private static Context mContext;
 
-    private DaoMaster.DevOpenHelper mDevOpenHelper;
     private SQLiteDatabase mDatabase;
-    private DaoMaster mDaoMaster;
     private DaoSession mDaoSession;
 
 
@@ -51,9 +49,9 @@ public class MyApplication extends Application {
         // 可能你已经注意到了，你并不需要去编写「CREATE TABLE」这样的 SQL 语句，因为greenDAO 已经帮你做了。
         // 注意：默认的DaoMaster.DevOpenHelper 会在数据库升级时，删除所有的表，意味着这将导致数据的丢失。
         // 所以，在正式的项目中，你还应该做一层封装，来实现数据库的安全升级。
-        mDevOpenHelper = new DaoMaster.DevOpenHelper(this, "thirdOpen-db", null);
+        DaoMaster.DevOpenHelper mDevOpenHelper = new DaoMaster.DevOpenHelper(this, "thirdOpen-db", null);
         mDatabase  = mDevOpenHelper.getWritableDatabase();
-        mDaoMaster = new DaoMaster(mDatabase);
+        DaoMaster mDaoMaster = new DaoMaster(mDatabase);
         mDaoSession = mDaoMaster.newSession();
     }
 
