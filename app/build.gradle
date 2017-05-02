@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.jakewharton.butterknife'
+apply plugin: 'org.greenrobot.greendao' // apply plugin
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
@@ -63,4 +64,6 @@ dependencies {
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
     testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
 //------
+
+    compile 'org.greenrobot:greendao:3.2.2' // add library
 }
