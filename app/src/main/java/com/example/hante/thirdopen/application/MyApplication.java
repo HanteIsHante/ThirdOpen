@@ -3,10 +3,7 @@ package com.example.hante.thirdopen.application;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
 
-import com.example.hante.greendao.DaoMaster;
-import com.example.hante.greendao.DaoSession;
 import com.example.hante.thirdopen.util.LogUtils;
 import com.squareup.leakcanary.LeakCanary;
 
@@ -27,10 +24,6 @@ public class MyApplication extends Application {
     private static MyApplication instance;
     private static Context mContext;
 
-    private SQLiteDatabase mDatabase;
-    private DaoSession mDaoSession;
-
-
     @Override
     public void onCreate () {
         super.onCreate();
@@ -41,29 +34,8 @@ public class MyApplication extends Application {
         instance = this;
         mContext = getApplicationContext();
         new LogUtils.Builder();
-        setDataBase();
+        GreenDaoManager.init(this);  //  初始化 greenao 管理类
     }
-
-    private void setDataBase () {
-        // 通过DaoMaster 的内部类 DevOpenHelper，你可以得到一个便利的SQLiteOpenHelper 对象。
-        // 可能你已经注意到了，你并不需要去编写「CREATE TABLE」这样的 SQL 语句，因为greenDAO 已经帮你做了。
-        // 注意：默认的DaoMaster.DevOpenHelper 会在数据库升级时，删除所有的表，意味着这将导致数据的丢失。
-        // 所以，在正式的项目中，你还应该做一层封装，来实现数据库的安全升级。
-        DaoMaster.DevOpenHelper mDevOpenHelper = new DaoMaster.DevOpenHelper(this, "thirdOpen-db", null);
-        mDatabase  = mDevOpenHelper.getWritableDatabase();
-        DaoMaster mDaoMaster = new DaoMaster(mDatabase);
-        mDaoSession = mDaoMaster.newSession();
-    }
-
-    public DaoSession getDaoSession() {
-        return mDaoSession;
-    }
-
-
-    public SQLiteDatabase getDb() {
-        return mDatabase;
-    }
-
     /**
      * 获取Application 实例
      *

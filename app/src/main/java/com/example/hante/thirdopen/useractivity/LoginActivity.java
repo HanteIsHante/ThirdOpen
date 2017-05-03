@@ -12,7 +12,7 @@ import android.widget.Toast;
 import com.example.hante.greendao.UserDao;
 import com.example.hante.thirdopen.R;
 import com.example.hante.thirdopen.ThirdOpenHomeActivity;
-import com.example.hante.thirdopen.application.MyApplication;
+import com.example.hante.thirdopen.application.GreenDaoManager;
 import com.example.hante.thirdopen.db.bean.User;
 import com.example.hante.thirdopen.util.Utils;
 
@@ -39,7 +39,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-        mUserDao = MyApplication.getInstance().getDaoSession().getUserDao();
+        mUserDao = GreenDaoManager.getINSTANCE().getDaoSession().getUserDao();
     }
 
     @OnClick({R.id.button_login, R.id.to_register})
