@@ -36,7 +36,7 @@ public class FreeBookAdapter extends RecyclerView.Adapter<FreeBookAdapter.FreeBo
 
     @Override
     public FreeBookAdapter.FreeBookViewHolder onCreateViewHolder (ViewGroup parent, int viewType) {
-       View inflate = LayoutInflater.from(mContext).inflate(R.layout.freebook_item_layout,
+       View inflate = LayoutInflater.from(mContext).inflate(R.layout.card_view_layout,
                parent, false);
        return new FreeBookViewHolder(inflate);
     }
