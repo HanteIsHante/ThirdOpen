@@ -1,5 +1,6 @@
 package com.example.hante.thirdopen.net;
 
+import com.example.hante.thirdopen.mvp.entry.douban.DouBanInTheaters;
 import com.example.hante.thirdopen.mvp.entry.freebook.FreeBook;
 import com.example.hante.thirdopen.mvp.entry.freebook.FreeBookInfo;
 
@@ -21,4 +22,8 @@ public interface NetInterface {
     // 获取book detail
     @GET("api/getBookInfo")
     Observable<FreeBookInfo> getBookInfo(@Query("id") int id);
+
+    //  当前正在上映movie
+    @GET("movie/in_theaters")
+    Observable<DouBanInTheaters> getDouBanMovies();
 }
