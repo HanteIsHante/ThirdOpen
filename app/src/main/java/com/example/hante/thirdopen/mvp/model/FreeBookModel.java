@@ -19,6 +19,7 @@ import io.reactivex.schedulers.Schedulers;
  * 获取数据
  */
 
+@SuppressWarnings("unchecked")
 public class FreeBookModel extends Network {
     private FreeBook mFreeBook;
     private static final NetInterface netInterface =

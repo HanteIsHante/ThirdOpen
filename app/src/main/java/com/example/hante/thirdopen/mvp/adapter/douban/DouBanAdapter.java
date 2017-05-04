@@ -1,4 +1,4 @@
-package com.example.hante.thirdopen.mvp.adapter;
+package com.example.hante.thirdopen.mvp.adapter.douban;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * Created By HanTe
+ *  豆瓣 适配器
  */
 
 public class DouBanAdapter extends RecyclerView.Adapter<DouBanAdapter.DouBanViewHolder>{
