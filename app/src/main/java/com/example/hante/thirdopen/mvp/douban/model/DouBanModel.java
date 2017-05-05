@@ -18,7 +18,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public class DouBanModel extends Network {
 
-    private static NetInterface INTERFACE = getRetrofit(Contract.DouBan_Base_Url).create(NetInterface.class);
+    private static NetInterface INTERFACE = createAPI(NetInterface.class, Contract.DouBan_Base_Url);
     /**
      * 获取 Theaters movies
      */
