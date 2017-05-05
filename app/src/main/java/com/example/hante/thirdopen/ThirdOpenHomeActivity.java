@@ -13,7 +13,6 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.hante.thirdopen.base.BaseActivity;
-import com.example.hante.thirdopen.mvp.fragment.BookFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,11 +49,12 @@ public class ThirdOpenHomeActivity extends BaseActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         List<Fragment> mFragmentList = new ArrayList<>();
         List<String> mStringList = new ArrayList<>();
-        BookFragment mBookFragment;
-        for(int i = 0; i < 6; i++) {
-            mBookFragment = new BookFragment();
-            mFragmentList.add(mBookFragment);
-        }
+        mFragmentList.add(new BookFragment());
+        mFragmentList.add(new DouBanFragment());
+        mFragmentList.add(new DouBanFragment());
+        mFragmentList.add(new DouBanFragment());
+        mFragmentList.add(new DouBanFragment());
+        mFragmentList.add(new DouBanFragment());
         mStringList.add("免费书籍");
         mStringList.add("豆瓣");
         mStringList.add("github");

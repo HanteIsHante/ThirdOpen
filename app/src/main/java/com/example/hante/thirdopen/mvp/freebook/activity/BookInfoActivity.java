@@ -1,4 +1,4 @@
-package com.example.hante.thirdopen.activity;
+package com.example.hante.thirdopen.mvp.freebook.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -12,8 +12,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.hante.thirdopen.R;
 import com.example.hante.thirdopen.base.BaseActivity;
-import com.example.hante.thirdopen.mvp.entry.freebook.FreeBookInfo;
-import com.example.hante.thirdopen.mvp.model.FreeBookModel;
+import com.example.hante.thirdopen.mvp.freebook.bean.FreeBookInfo;
+import com.example.hante.thirdopen.mvp.freebook.model.FreeBookModel;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

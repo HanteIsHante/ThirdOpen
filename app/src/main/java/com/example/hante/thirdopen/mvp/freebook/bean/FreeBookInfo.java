@@ -1,4 +1,4 @@
-package com.example.hante.thirdopen.mvp.entry.freebook;
+package com.example.hante.thirdopen.mvp.freebook.bean;
 
 import java.io.Serializable;
 

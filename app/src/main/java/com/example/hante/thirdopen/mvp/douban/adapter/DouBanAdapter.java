@@ -1,4 +1,4 @@
-package com.example.hante.thirdopen.mvp.adapter.douban;
+package com.example.hante.thirdopen.mvp.douban.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -31,7 +31,7 @@ public class DouBanAdapter extends RecyclerView.Adapter<DouBanAdapter.DouBanView
 
 
     private interface onItemClickListener{
-        void onItemClick (View view, int position);
+        void onItemClick(View view, int position);
     }
 
     public void setOnItemClickListener(onItemClickListener OnItemClickListener){

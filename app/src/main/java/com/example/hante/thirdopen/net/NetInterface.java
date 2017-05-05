@@ -1,8 +1,9 @@
 package com.example.hante.thirdopen.net;
 
-import com.example.hante.thirdopen.mvp.entry.douban.DouBanInTheaters;
-import com.example.hante.thirdopen.mvp.entry.freebook.FreeBook;
-import com.example.hante.thirdopen.mvp.entry.freebook.FreeBookInfo;
+
+import com.example.hante.thirdopen.mvp.douban.bean.DouBanInTheaters;
+import com.example.hante.thirdopen.mvp.freebook.bean.FreeBook;
+import com.example.hante.thirdopen.mvp.freebook.bean.FreeBookInfo;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;

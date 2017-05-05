@@ -1,4 +1,4 @@
-package com.example.hante.thirdopen.mvp.fragment;
+package com.example.hante.thirdopen.mvp.freebook.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,12 +13,12 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.hante.thirdopen.R;
-import com.example.hante.thirdopen.activity.BookInfoActivity;
 import com.example.hante.thirdopen.custome.GlideImageLoader;
-import com.example.hante.thirdopen.mvp.adapter.freebook.FreeBookAdapter;
-import com.example.hante.thirdopen.mvp.entry.freebook.FreeBook;
-import com.example.hante.thirdopen.mvp.presenter.BookBusinessPresenter;
-import com.example.hante.thirdopen.mvp.view.BookView;
+import com.example.hante.thirdopen.mvp.freebook.activity.BookInfoActivity;
+import com.example.hante.thirdopen.mvp.freebook.adapter.FreeBookAdapter;
+import com.example.hante.thirdopen.mvp.freebook.bean.FreeBook;
+import com.example.hante.thirdopen.mvp.freebook.presenter.BookBusinessPresenter;
+import com.example.hante.thirdopen.mvp.freebook.view.BookView;
 import com.youth.banner.Banner;
 
 import java.util.ArrayList;

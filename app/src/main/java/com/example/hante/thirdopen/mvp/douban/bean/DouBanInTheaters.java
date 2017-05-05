@@ -1,4 +1,4 @@
-package com.example.hante.thirdopen.mvp.entry.douban;
+package com.example.hante.thirdopen.mvp.douban.bean;
 
 import java.io.Serializable;
 import java.util.List;
@@ -432,5 +432,16 @@ public class DouBanInTheaters implements Serializable {
                 }
             }
         }
+    }
+
+    @Override
+    public String toString() {
+        return "DouBanInTheaters{" +
+                "count=" + count +
+                ", start=" + start +
+                ", total=" + total +
+                ", title='" + title + '\'' +
+                ", subjects=" + subjects +
+                '}';
     }
 }

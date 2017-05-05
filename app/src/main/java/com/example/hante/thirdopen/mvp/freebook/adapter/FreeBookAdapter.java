@@ -1,4 +1,4 @@
-package com.example.hante.thirdopen.mvp.adapter.freebook;
+package com.example.hante.thirdopen.mvp.freebook.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.hante.thirdopen.R;
-import com.example.hante.thirdopen.mvp.entry.freebook.FreeBook;
+import com.example.hante.thirdopen.mvp.freebook.bean.FreeBook;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +26,7 @@ public class FreeBookAdapter extends RecyclerView.Adapter<FreeBookAdapter.FreeBo
     private onItemClickListener mOnItemClickListener;
     private Context mContext;
     private List<FreeBook.DataBean.HotBookBean> mHotBookBeen;
-    public FreeBookAdapter (Context context, List<FreeBook.DataBean.HotBookBean> hotBookBeen) {
+    public FreeBookAdapter(Context context, List<FreeBook.DataBean.HotBookBean> hotBookBeen) {
         mContext = context;
         if(hotBookBeen == null) {
             hotBookBeen = new ArrayList<>();
@@ -70,7 +70,7 @@ public class FreeBookAdapter extends RecyclerView.Adapter<FreeBookAdapter.FreeBo
     }
 
     public interface onItemClickListener{
-        void onItemClick (View view, int position);
+        void onItemClick(View view, int position);
     }
     public void setOnItemClickListener(onItemClickListener onItemClickListener){
         this.mOnItemClickListener = onItemClickListener;
