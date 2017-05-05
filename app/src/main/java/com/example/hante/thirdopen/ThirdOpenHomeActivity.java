@@ -13,6 +13,8 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.hante.thirdopen.base.BaseActivity;
+import com.example.hante.thirdopen.mvp.douban.fragment.DouBanFragment;
+import com.example.hante.thirdopen.mvp.freebook.fragment.BookFragment;
 
 import java.util.ArrayList;
 import java.util.List;
