@@ -5,7 +5,7 @@ import com.example.hante.thirdopen.contract.Contract;
 import com.example.hante.thirdopen.mvp.BasePresenter;
 import com.example.hante.thirdopen.mvp.entry.freebook.FreeBook;
 import com.example.hante.thirdopen.mvp.entry.freebook.FreeBookInfo;
-import com.example.hante.thirdopen.net.NetInterface;
+import com.example.hante.thirdopen.net.GetNetInterface;
 import com.example.hante.thirdopen.net.Network;
 import com.example.hante.thirdopen.util.LogUtils;
 
@@ -22,14 +22,12 @@ import io.reactivex.schedulers.Schedulers;
 @SuppressWarnings("unchecked")
 public class FreeBookModel extends Network {
     private FreeBook mFreeBook;
-    private static final NetInterface netInterface =
-            getRetrofit(Contract.FreeBook_Base_Url).create(NetInterface.class);
     private Disposable mDisposable;
     private static FreeBookInfo mFreeBookInfo;
-
     public void loadBookData (boolean fresh, final BasePresenter basePresenter) {
         if(fresh) {
-            netInterface.getHomeInfo()
+            GetNetInterface.getNetInterface(Contract.FreeBook_Base_Url)
+            .getHomeInfo()
                     .subscribeOn(Schedulers.newThread())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new Observer<FreeBook>() {
@@ -59,7 +57,8 @@ public class FreeBookModel extends Network {
 
     public static void getFreeBookInfo (int id, PageInterface pageInterface) {
         final PageInterface mPageInterface = pageInterface;
-        netInterface.getBookInfo(id).subscribeOn(Schedulers.newThread())
+        GetNetInterface.getNetInterface(Contract.FreeBook_Base_Url)
+                .getBookInfo(id).subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<FreeBookInfo>() {
                     @Override
