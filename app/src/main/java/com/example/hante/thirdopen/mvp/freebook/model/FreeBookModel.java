@@ -1,10 +1,10 @@
 package com.example.hante.thirdopen.mvp.freebook.model;
 
 import com.example.hante.thirdopen.contract.Contract;
-import com.example.hante.thirdopen.mvp.BasePresenter;
 import com.example.hante.thirdopen.mvp.freebook.activity.PageInterface;
 import com.example.hante.thirdopen.mvp.freebook.bean.FreeBook;
 import com.example.hante.thirdopen.mvp.freebook.bean.FreeBookInfo;
+import com.example.hante.thirdopen.mvp.freebook.contract.BookInterface;
 import com.example.hante.thirdopen.net.NetInterface;
 import com.example.hante.thirdopen.net.Network;
 import com.example.hante.thirdopen.util.LogUtils;
@@ -25,40 +25,42 @@ public class FreeBookModel extends Network {
     private static NetInterface INTERFACE = createAPI(NetInterface.class, Contract.FreeBook_Base_Url);
     private static FreeBookInfo mFreeBookInfo;
 
-    public void loadBookData(boolean fresh, final BasePresenter basePresenter) {
+    public void loadBookData(boolean fresh, final BookInterface.Presenter basePresenter) {
         if (fresh) {
             INTERFACE
-            .getHomeInfo()
-            .subscribeOn(Schedulers.newThread())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(new Observer<FreeBook>() {
-                @Override
-                public void onSubscribe(Disposable d) {
-                    mDisposable = d;
-                }
+                    .getHomeInfo()
+                    .subscribeOn(Schedulers.newThread())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Observer<FreeBook>() {
+                        @Override
+                        public void onSubscribe(Disposable d) {
+                            mDisposable = d;
+                        }
 
-                @Override
-                public void onNext(FreeBook freeBook) {
-                    mFreeBook = freeBook;
-                }
+                        @Override
+                        public void onNext(FreeBook freeBook) {
+                            LogUtils.d(freeBook.toString());
+                            mFreeBook = freeBook;
+                        }
 
-                @Override
-                public void onError(Throwable e) {
-                    basePresenter.onFail(e.toString());
-                }
+                        @Override
+                        public void onError(Throwable e) {
+                            LogUtils.e("Error " + e.getMessage());
+                            basePresenter.onFail(e.getMessage());
+                        }
 
-                @Override
-                public void onComplete() {
-                    LogUtils.json(mFreeBook.toString());
-                    basePresenter.onSuccess(mFreeBook);
-                }
-            });
+                        @Override
+                        public void onComplete() {
+                            LogUtils.json(mFreeBook.toString());
+                            basePresenter.onSuccess(mFreeBook);
+                        }
+                    });
         }
     }
 
     public static void getFreeBookInfo(int id, PageInterface pageInterface) {
         final PageInterface mPageInterface = pageInterface;
-                INTERFACE
+        INTERFACE
                 .getBookInfo(id).subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<FreeBookInfo>() {

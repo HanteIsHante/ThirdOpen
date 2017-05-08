@@ -3,6 +3,7 @@ package com.example.hante.thirdopen.mvp.douban.contract;
 import android.support.annotation.NonNull;
 
 import com.example.hante.thirdopen.mvp.BaseModel;
+import com.example.hante.thirdopen.mvp.BasePresenter;
 import com.example.hante.thirdopen.mvp.BaseView;
 import com.example.hante.thirdopen.mvp.douban.bean.DouBanInTheaters;
 
@@ -14,7 +15,7 @@ import java.util.List;
 
 public interface DouBanInterface {
 
-    interface View extends BaseView {
+    interface View extends BaseView<Presenter> {
         /**
          * 请求到的数据
          *
@@ -52,7 +53,7 @@ public interface DouBanInterface {
         }
     }
 
-    interface Presenter {
+    interface Presenter extends BasePresenter {
         /**
          * 获取远程数据
          */

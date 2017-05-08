@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.example.hante.thirdopen.R;
 import com.example.hante.thirdopen.mvp.douban.bean.DouBanInTheaters;
 import com.example.hante.thirdopen.mvp.douban.contract.DouBanInterface;
+import com.example.hante.thirdopen.mvp.douban.presenter.DouBanPresenter;
 import com.example.hante.thirdopen.util.LogUtils;
 
 import java.util.List;
@@ -44,6 +45,7 @@ public class DouBanFragment extends Fragment implements
         View inflate = inflater.inflate(R.layout.douban_frag, container, false);
         unbinder = ButterKnife.bind(this, inflate);
         mRootFresh.setOnRefreshListener(this);
+        new DouBanPresenter(this);
         return inflate;
     }
 
@@ -67,5 +69,10 @@ public class DouBanFragment extends Fragment implements
     @Override
     public void onError(@NonNull String errorMsg) {
         Toast.makeText(getActivity(), errorMsg, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void setPresenter(DouBanInterface.Presenter presenter) {
+        mPresenter = presenter;
     }
 }

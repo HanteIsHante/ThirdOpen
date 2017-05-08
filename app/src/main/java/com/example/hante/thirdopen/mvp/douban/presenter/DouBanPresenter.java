@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.example.hante.thirdopen.mvp.douban.bean.DouBanInTheaters;
 import com.example.hante.thirdopen.mvp.douban.contract.DouBanInterface;
+import com.example.hante.thirdopen.mvp.douban.model.DouBanModel;
 
 import java.util.List;
 
@@ -14,6 +15,12 @@ import java.util.List;
 public class DouBanPresenter implements DouBanInterface.Presenter {
     private DouBanInterface.View mView;
     private DouBanInterface.DouBanModel mModel;
+
+    public DouBanPresenter(DouBanInterface.View view) {
+        mView = view;
+        mView.setPresenter(this);
+        mModel = new DouBanModel();
+    }
 
     @Override
     public void getRemoteDate() {
@@ -33,5 +40,10 @@ public class DouBanPresenter implements DouBanInterface.Presenter {
                 mView.onError(msg);
             }
         });
+    }
+
+    @Override
+    public void start() {
+
     }
 }

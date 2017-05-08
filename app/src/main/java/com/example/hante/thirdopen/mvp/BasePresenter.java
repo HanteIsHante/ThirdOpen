@@ -5,9 +5,12 @@ package com.example.hante.thirdopen.mvp;
  * MVP 基础Presenter 逻辑类
  */
 
-public interface BasePresenter<T> {
+public interface BasePresenter {
 
-    void onSuccess (T data);
-    void onFail (String msg);
+    /**
+     * 构建当前页面时，
+     * 可设置一些初始化的数据
+     */
+    void start();
 
 }

@@ -17,8 +17,8 @@ import com.example.hante.thirdopen.custome.GlideImageLoader;
 import com.example.hante.thirdopen.mvp.freebook.activity.BookInfoActivity;
 import com.example.hante.thirdopen.mvp.freebook.adapter.FreeBookAdapter;
 import com.example.hante.thirdopen.mvp.freebook.bean.FreeBook;
+import com.example.hante.thirdopen.mvp.freebook.contract.BookInterface;
 import com.example.hante.thirdopen.mvp.freebook.presenter.BookBusinessPresenter;
-import com.example.hante.thirdopen.mvp.freebook.view.BookView;
 import com.youth.banner.Banner;
 
 import java.util.ArrayList;
@@ -29,38 +29,34 @@ import java.util.List;
  * 操控presenter 获取数据
  */
 
-public class BookFragment extends Fragment implements BookView, SwipeRefreshLayout.OnRefreshListener,
+public class BookFragment extends Fragment implements BookInterface.View, SwipeRefreshLayout.OnRefreshListener,
         FreeBookAdapter.onItemClickListener {
     RecyclerView mRecyclerViewFreeBook;
     SwipeRefreshLayout mFreeBookRefresh;
     Banner mBannerFreeBook;
-    private BookBusinessPresenter mBookPresenter;
+    private BookInterface.Presenter mBookPresenter;
 
-    @Override
-    public void onCreate (@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mBookPresenter = new BookBusinessPresenter(this);
-    }
 
     @Nullable
     @Override
-    public View onCreateView (LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View inflate = inflater.inflate(R.layout.freebook_frg_layout, container, false);
+        new BookBusinessPresenter(this);
         initUI(inflate);
         return inflate;
     }
 
 
-    private void initUI (View inflate) {
-        mRecyclerViewFreeBook = (RecyclerView)inflate.findViewById(R.id.recyclerView_freeBook);
-        mFreeBookRefresh = (SwipeRefreshLayout)inflate.findViewById(R.id.freeBook_refresh);
-        mBannerFreeBook = (Banner)inflate.findViewById(R.id.banner_freeBook);
+    private void initUI(View inflate) {
+        mRecyclerViewFreeBook = (RecyclerView) inflate.findViewById(R.id.recyclerView_freeBook);
+        mFreeBookRefresh = (SwipeRefreshLayout) inflate.findViewById(R.id.freeBook_refresh);
+        mBannerFreeBook = (Banner) inflate.findViewById(R.id.banner_freeBook);
         mFreeBookRefresh.setOnRefreshListener(this);
         mFreeBookRefresh.post(new Runnable() {
             @Override
-            public void run () {
+            public void run() {
                 mFreeBookRefresh.setRefreshing(true);
-                mBookPresenter.loadData(true);
+                mBookPresenter.start();
             }
         });
         mBannerFreeBook.setImageLoader(new GlideImageLoader());
@@ -71,22 +67,22 @@ public class BookFragment extends Fragment implements BookView, SwipeRefreshLayo
     }
 
     @Override
-    public void onStop () {
+    public void onStop() {
         super.onStop();
         // 销毁
         mBookPresenter.stopRequest();
     }
 
     @Override
-    public void onDestroy () {
+    public void onDestroy() {
         super.onDestroy();
     }
 
 
     @Override
-    public void newFreeBooks (List<FreeBook.DataBean.HotBookBean> book) {
+    public void newFreeBooks(List<FreeBook.DataBean.HotBookBean> book) {
         // 更新UI
-        if(book != null) {
+        if (book != null) {
             FreeBookAdapter mFreeBookAdapter = new FreeBookAdapter(getActivity(), book);
             mRecyclerViewFreeBook.setAdapter(mFreeBookAdapter);
             mFreeBookRefresh.setRefreshing(false);
@@ -95,30 +91,35 @@ public class BookFragment extends Fragment implements BookView, SwipeRefreshLayo
     }
 
     @Override
-    public void showFailMsg (String msg) {
+    public void showFailMsg(String msg) {
         // 显示错误信息
         Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
         mFreeBookRefresh.setRefreshing(false);
     }
 
     @Override
-    public void setBanner (List<FreeBook.DataBean.BannerBean> beanList) {
+    public void setBanner(List<FreeBook.DataBean.BannerBean> beanList) {
         List<String> list = new ArrayList<>();
-        for(int i = 0; i < beanList.size(); i++) {
+        for (int i = 0; i < beanList.size(); i++) {
             list.add(beanList.get(i).getImageUrl());
         }
         mBannerFreeBook.setImages(list).start();
     }
 
     @Override
-    public void onRefresh () {
-        mBookPresenter.loadData(true);
+    public void onRefresh() {
+        mBookPresenter.start();
     }
 
     @Override
-    public void onItemClick (View view, int position) {
+    public void onItemClick(View view, int position) {
         // 跳转详情页，传值
         Toast.makeText(getActivity(), "click book id" + position, Toast.LENGTH_SHORT).show();
         BookInfoActivity.setId(getActivity(), position);
+    }
+
+    @Override
+    public void setPresenter(BookInterface.Presenter presenter) {
+        mBookPresenter = presenter;
     }
 }
