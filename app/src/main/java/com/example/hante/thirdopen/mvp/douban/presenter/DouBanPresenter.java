@@ -31,8 +31,9 @@ public class DouBanPresenter implements DouBanInterface.Presenter {
             @Override
             public void onSuccess(DouBanInTheaters theaters) {
                 String title = theaters.getTitle();
+                int count = theaters.getCount();
                 List<DouBanInTheaters.SubjectsBean> subjects = theaters.getSubjects();
-                mView.upDate(title, subjects);
+                mView.upDate(title + " " + count, subjects);
             }
 
             @Override
