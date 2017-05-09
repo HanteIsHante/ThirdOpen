@@ -40,10 +40,10 @@ public class DouBanPhotoItemAdapter extends RecyclerView.Adapter<DouBanPhotoItem
         DouBanInTheaters.SubjectsBean.CastsBean castsBean = castsBeanList.get(position);
         holder.mName.setText(castsBean.getName());
         if (castsBean.getAvatars() != null) {
-            String medium = castsBean.getAvatars().getMedium();
+            String medium = castsBean.getAvatars().getLarge();
             if ( medium != null && !"".equalsIgnoreCase(medium)) {
                 Glide.with(mContext)
-                        .load(castsBean.getAvatars().getMedium())
+                        .load(castsBean.getAvatars().getLarge())
                         .error(mContext.getResources().getDrawable(R.mipmap.nocover))
                         .into(holder.mPhoto);
             }

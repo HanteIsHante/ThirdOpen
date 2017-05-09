@@ -6,8 +6,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.hante.thirdopen.R;
 import com.example.hante.thirdopen.mvp.douban.bean.DouBanInTheaters;
 
@@ -44,6 +46,7 @@ public class DouBanAdapter extends RecyclerView.Adapter<DouBanAdapter.DouBanView
         holder.mTitle.setText(subjectsBean.getTitle());
         holder.mContent.setText(subjectsBean.getGenres().toString());
         holder.mAverage.setText(String.valueOf(subjectsBean.getRating().getAverage()));
+        Glide.with(mContext).load(subjectsBean.getImages().getLarge()).into(holder.mMoviePhoto);
         holder.mPhotoItem.setAdapter(new DouBanPhotoItemAdapter(mContext, subjectsBean.getCasts()));
     }
 
@@ -66,6 +69,7 @@ public class DouBanAdapter extends RecyclerView.Adapter<DouBanAdapter.DouBanView
         private TextView mTitle;
         private TextView mContent;
         private RecyclerView mPhotoItem;
+        private ImageView mMoviePhoto;
         private TextView mAverage;
 
         DouBanViewHolder(View itemView) {
@@ -74,6 +78,7 @@ public class DouBanAdapter extends RecyclerView.Adapter<DouBanAdapter.DouBanView
             mContent = (TextView) itemView.findViewById(R.id.movie_content);
             mAverage = (TextView) itemView.findViewById(R.id.average);
             mPhotoItem = (RecyclerView) itemView.findViewById(R.id.start_name_list);
+            mMoviePhoto = (ImageView)itemView.findViewById(R.id.movie_photo);
             LinearLayoutManager lm = new LinearLayoutManager(mContext);
             lm.setOrientation(LinearLayoutManager.HORIZONTAL);
             mPhotoItem.setLayoutManager(lm);
