@@ -2,8 +2,10 @@ package com.example.hante.thirdopen.application;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.Context;
 
 import com.example.hante.thirdopen.util.LogUtils;
+import com.squareup.leakcanary.LeakCanary;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,37 +22,49 @@ public class MyApplication extends Application {
     // 记录需要一次性关闭的activity
     private List<Activity> tempActivity = new ArrayList<>();
     private static MyApplication instance;
+    private static Context mContext;
+
     @Override
     public void onCreate () {
         super.onCreate();
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            return;
+        }
+        LeakCanary.install(this);
         instance = this;
-
+        mContext = getApplicationContext();
         new LogUtils.Builder();
-
+        GreenDaoManager.init(this);  //  初始化 greenao 管理类
     }
-
     /**
      * 获取Application 实例
+     *
      * @return instance
      */
-    public static MyApplication getInstance(){
+    public static MyApplication getInstance () {
         return instance;
+    }
+
+    public static Context getContext () {
+        return mContext;
     }
 
     /**
      * 将打开的activity 添加到集合中
-     * @param activity  activity
+     *
+     * @param activity activity
      */
-    public void addActivity (Activity activity){
+    public void addActivity (Activity activity) {
         openActivity.add(activity);
     }
 
     /**
      * 结束指定activity
+     *
      * @param activity 指定activity
      */
-    public void finishActivity (Activity activity){
-        if (activity != null){
+    public void finishActivity (Activity activity) {
+        if(activity != null) {
             this.openActivity.remove(activity);
             activity.finish();
             activity = null;
@@ -59,30 +73,33 @@ public class MyApplication extends Application {
 
     /**
      * 添加临时 activity
+     *
      * @param activity 指定activity
      */
-    public void addTempActivity (Activity activity){
+    public void addTempActivity (Activity activity) {
         tempActivity.add(activity);
     }
 
     /**
      * 移除指定临时activity
+     *
      * @param activity 指定activity
      */
-    public void finishTempActivity (Activity activity){
-        if (activity != null){
+    public void finishTempActivity (Activity activity) {
+        if(activity != null) {
             this.tempActivity.remove(activity);
             activity.finish();
             activity = null;
         }
     }
+
     /**
      * 退出指定 的临时activity 集合
      */
-    public void exitTempActivitys (){
+    public void exitTempActivitys () {
         for(Activity activity : tempActivity) {
-            if (activity != null) {
-                    activity.finish();
+            if(activity != null) {
+                activity.finish();
             }
         }
     }
@@ -90,7 +107,7 @@ public class MyApplication extends Application {
     /**
      * 应用退出，结束所有activity
      */
-    public void exit() {
+    public void exit () {
         for(Activity activity : openActivity) {
             if(activity != null) {
                 activity.finish();

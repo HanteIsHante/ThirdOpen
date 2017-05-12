@@ -8,12 +8,14 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.hante.thirdopen.base.BaseActivity;
-import com.example.hante.thirdopen.mvp.fragment.BookFragment;
+import com.example.hante.thirdopen.mvp.douban.fragment.DouBanFragment;
+import com.example.hante.thirdopen.mvp.freebook.fragment.BookFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +31,7 @@ public class ThirdOpenHomeActivity extends BaseActivity {
     TabLayout mHomeTabLayout;
     @BindView(R.id.tabLayout_viewpager)
     ViewPager mTabLayoutViewpager;
+
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,11 +52,12 @@ public class ThirdOpenHomeActivity extends BaseActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         List<Fragment> mFragmentList = new ArrayList<>();
         List<String> mStringList = new ArrayList<>();
-        BookFragment mBookFragment = null;
-        for(int i = 0; i < 6; i++) {
-            mBookFragment = new BookFragment();
-            mFragmentList.add(mBookFragment);
-        }
+        mFragmentList.add(new BookFragment());
+        mFragmentList.add(new DouBanFragment());
+        mFragmentList.add(new DouBanFragment());
+        mFragmentList.add(new DouBanFragment());
+        mFragmentList.add(new DouBanFragment());
+        mFragmentList.add(new DouBanFragment());
         mStringList.add("免费书籍");
         mStringList.add("豆瓣");
         mStringList.add("github");
@@ -74,30 +78,39 @@ public class ThirdOpenHomeActivity extends BaseActivity {
     @Override
     public boolean onCreateOptionsMenu (Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
-        /**
-         * 搜索按钮的相关逻辑
-         * */
-        MenuItem menuItem=menu.findItem(R.id.action_search);//
-        SearchView searchView= (SearchView) MenuItemCompat.getActionView(menuItem);//加载searchview
+        /*
+          搜索按钮的相关逻辑
+          */
+        MenuItem menuItem = menu.findItem(R.id.action_search);//
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);//加载searchview
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public boolean onQueryTextSubmit(String query) {
+            public boolean onQueryTextSubmit (String query) {
                 Toast.makeText(ThirdOpenHomeActivity.this, query, Toast.LENGTH_SHORT).show();
                 return true;
             }
 
             @Override
-            public boolean onQueryTextChange(String newText) {
-                if (TextUtils.isEmpty((newText))){
-                    Toast.makeText(ThirdOpenHomeActivity.this,"isEmpty",Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(ThirdOpenHomeActivity.this, newText,Toast.LENGTH_SHORT).show();
+            public boolean onQueryTextChange (String newText) {
+                if(TextUtils.isEmpty((newText))) {
+                    Toast.makeText(ThirdOpenHomeActivity.this, "isEmpty", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(ThirdOpenHomeActivity.this, newText, Toast.LENGTH_SHORT).show();
                 }
-                return true;}
+                return true;
+            }
         });//为搜索框设置监听事件
         searchView.setSubmitButtonEnabled(true);//设置是否显示搜索按钮
         searchView.setQueryHint("查找");//设置提示信息
         searchView.setIconifiedByDefault(true);//设置搜索默认为图标
         return true;
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK){
+            moveTaskToBack(true);
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }
