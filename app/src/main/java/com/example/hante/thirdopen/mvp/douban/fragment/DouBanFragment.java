@@ -1,5 +1,7 @@
 package com.example.hante.thirdopen.mvp.douban.fragment;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -78,6 +80,7 @@ public class DouBanFragment extends Fragment implements
         DouBanAdapter adapter = new DouBanAdapter(getActivity(), subjectsBeanList);
         mRecyclerViewDouBan.setAdapter(adapter);
         mRootFresh.setRefreshing(false);
+        adapter.setOnItemClickListener(this);
     }
 
     @Override
@@ -90,8 +93,14 @@ public class DouBanFragment extends Fragment implements
         mPresenter = presenter;
     }
 
+    /**
+     * Item  的 点击事件
+     *
+     * @param view 控件view
+     * @param url  web 链接
+     */
     @Override
-    public void onItemClick(View view, int position) {
-
+    public void onItemClick(View view, String url) {
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
     }
 }

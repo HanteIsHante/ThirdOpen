@@ -41,13 +41,38 @@ public class DouBanAdapter extends RecyclerView.Adapter<DouBanAdapter.DouBanView
     }
 
     @Override
-    public void onBindViewHolder(DouBanViewHolder holder, int position) {
-        DouBanInTheaters.SubjectsBean subjectsBean = mSubList.get(position);
+    public void onBindViewHolder(final DouBanViewHolder holder, final int position) {
+        final DouBanInTheaters.SubjectsBean subjectsBean = mSubList.get(position);
         holder.mTitle.setText(subjectsBean.getTitle());
+        holder.mTitle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mOnItemClickListener != null) {
+                    mOnItemClickListener.onItemClick(v, subjectsBean.getAlt());
+                }
+            }
+        });
         holder.mContent.setText(subjectsBean.getGenres().toString());
         holder.mAverage.setText(String.valueOf(subjectsBean.getRating().getAverage()));
         Glide.with(mContext).load(subjectsBean.getImages().getLarge()).into(holder.mMoviePhoto);
-        holder.mPhotoItem.setAdapter(new DouBanPhotoItemAdapter(mContext, subjectsBean.getCasts()));
+        holder.mMoviePhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mOnItemClickListener != null) {
+                    mOnItemClickListener.onItemClick(v, subjectsBean.getAlt());
+                }
+            }
+        });
+        DouBanPhotoItemAdapter peoplePhoto = new DouBanPhotoItemAdapter(mContext, subjectsBean.getCasts());
+        holder.mPhotoItem.setAdapter(peoplePhoto);
+        peoplePhoto.setOnItemClickListener(new DouBanPhotoItemAdapter.onItemClickListener() {
+            @Override
+            public void OnItemClick(View view, String peopleUrl) {
+                if (mOnItemClickListener != null) {
+                    mOnItemClickListener.onItemClick(view, peopleUrl);
+                }
+            }
+        });
     }
 
     @Override
@@ -57,7 +82,7 @@ public class DouBanAdapter extends RecyclerView.Adapter<DouBanAdapter.DouBanView
 
 
     public interface onItemClickListener {
-        void onItemClick(View view, int position);
+        void onItemClick(View view, String url);
     }
 
     public void setOnItemClickListener(onItemClickListener OnItemClickListener) {
@@ -78,7 +103,7 @@ public class DouBanAdapter extends RecyclerView.Adapter<DouBanAdapter.DouBanView
             mContent = (TextView) itemView.findViewById(R.id.movie_content);
             mAverage = (TextView) itemView.findViewById(R.id.average);
             mPhotoItem = (RecyclerView) itemView.findViewById(R.id.start_name_list);
-            mMoviePhoto = (ImageView)itemView.findViewById(R.id.movie_photo);
+            mMoviePhoto = (ImageView) itemView.findViewById(R.id.movie_photo);
             LinearLayoutManager lm = new LinearLayoutManager(mContext);
             lm.setOrientation(LinearLayoutManager.HORIZONTAL);
             mPhotoItem.setLayoutManager(lm);

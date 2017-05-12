@@ -22,6 +22,7 @@ public class DouBanPhotoItemAdapter extends RecyclerView.Adapter<DouBanPhotoItem
 
     private Context mContext;
     private List<DouBanInTheaters.SubjectsBean.CastsBean> castsBeanList;
+    private onItemClickListener itemClickListener;
 
     public DouBanPhotoItemAdapter(Context mContext,
                                   List<DouBanInTheaters.SubjectsBean.CastsBean> castsBeanList) {
@@ -37,17 +38,25 @@ public class DouBanPhotoItemAdapter extends RecyclerView.Adapter<DouBanPhotoItem
 
     @Override
     public void onBindViewHolder(DouBanPhotoViewHolder holder, int position) {
-        DouBanInTheaters.SubjectsBean.CastsBean castsBean = castsBeanList.get(position);
+        final DouBanInTheaters.SubjectsBean.CastsBean castsBean = castsBeanList.get(position);
         holder.mName.setText(castsBean.getName());
         if (castsBean.getAvatars() != null) {
             String medium = castsBean.getAvatars().getLarge();
-            if ( medium != null && !"".equalsIgnoreCase(medium)) {
+            if (medium != null && !"".equalsIgnoreCase(medium)) {
                 Glide.with(mContext)
                         .load(castsBean.getAvatars().getLarge())
                         .error(mContext.getResources().getDrawable(R.mipmap.nocover))
                         .into(holder.mPhoto);
             }
         }
+        holder.mPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (itemClickListener != null) {
+                    itemClickListener.OnItemClick(v, castsBean.getAlt());
+                }
+            }
+        });
     }
 
     @Override
@@ -64,5 +73,13 @@ public class DouBanPhotoItemAdapter extends RecyclerView.Adapter<DouBanPhotoItem
             mName = (TextView) itemView.findViewById(R.id.name_title);
             mPhoto = (ImageView) itemView.findViewById(R.id.name_photo);
         }
+    }
+
+    public interface onItemClickListener {
+        void OnItemClick(View view, String peopleUrl);
+    }
+
+    public void setOnItemClickListener(onItemClickListener onItemClickListener) {
+        this.itemClickListener = onItemClickListener;
     }
 }
